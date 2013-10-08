@@ -41,52 +41,41 @@
 #include "BigIntegerLibrary.hh"
 #include "Wafer.h"
 #include "PeriodicElementFactory.h"
-#include "matplotpp.h"
+#include <mgl2/mgl_cf.h>
 
-using namespace std;
+// using namespace std;
 
-class MP :public MatPlot
-{ 
-	void DISPLAY()
-	{
-    	vector<double> x(100),y(100);    
-    	for(int i=0;i<100;++i)
-    	{
-			x[i]=0.1*i;
-			y[i]=sin(x[i]);
-    	}
-    	plot(x,y);
-    }
-}mp;
+// string makeBigString(int base, int exponent)
+// {
+// 	stringstream ss;
+// 	ss << base;
+// 	for (int i = 0; i < exponent; i++)
+// 	{
+// 		ss << 0;
+// 	}
+// 	return ss.str();
+// }
 
-void display(){ mp.display(); }
-void reshape(int w,int h){ mp.reshape(w,h); }
+// int main(int argc, char *argv[]) 
+// {
+// 	cout << "launching ritprem" << endl;
+// 	PeriodicElementFactory periodicElemFactory;
+// 	PeriodicElement boron = periodicElemFactory.getElement("B");
+// 	BigUnsigned conc = stringToBigUnsigned(makeBigString(2, 15));
 
-string makeBigString(int base, int exponent)
-{
-	stringstream ss;
-	ss << base;
-	for (int i = 0; i < exponent; i++)
-	{
-		ss << 0;
-	}
-	return ss.str();
-}
-
-int main(int argc, char *argv[]) 
-{
-	cout << "launching ritprem" << endl;
-	PeriodicElementFactory periodicElemFactory;
-	PeriodicElement boron = periodicElemFactory.getElement("B");
-	BigUnsigned conc = stringToBigUnsigned(makeBigString(2, 15));
-
-	Wafer wafer(6.0, 0.01, Concentration(boron, conc)); 
+// 	Wafer wafer(6.0, 0.01, Concentration(boron, conc)); 
 	
-	glutInit(&argc, argv);
-	glutCreateWindow(100,100,400,300);
-	glutDisplayFunc( display );
-	glutReshapeFunc( reshape );
-	glutMainLoop();  
-	return 0;
+	
+// 	return 0;
+// }
+int sample(HMGL gr, void *)
+{
+  mgl_rotate(gr,60,40,0);
+  mgl_box(gr);
 }
 
+int main(int argc,char **argv)
+{
+  mglGLUT gr(sample,"MathGL examples");
+  return 0;
+}
