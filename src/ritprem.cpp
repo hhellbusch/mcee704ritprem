@@ -31,58 +31,62 @@
  * Team Members: Nate Walsh, Will Abisalih, Nicholas Edwards
  *
  * number of beers consumed while programming this:
- * 	Henry : 2
+ * 	Henry : 3
  */
 
 
-// #include <iostream>
-// #include <string>
-// #include <sstream>
-// #include "BigIntegerLibrary.hh"
-// #include "Wafer.h"
-// #include "PeriodicElementFactory.h"
+#include <iostream>
+#include <string>
+#include <sstream>
+#include "BigIntegerLibrary.hh"
+#include "Wafer.h"
+#include "PeriodicElementFactory.h"
 #include "matplotpp.h"
 
 using namespace std;
 
-class MP :public MatPlot{ 
-void DISPLAY(){
-    vector<double> x(100),y(100);    
-    for(int i=0;i<100;++i){
-	x[i]=0.1*i;
-	y[i]=sin(x[i]);
+class MP :public MatPlot
+{ 
+	void DISPLAY()
+	{
+    	vector<double> x(100),y(100);    
+    	for(int i=0;i<100;++i)
+    	{
+			x[i]=0.1*i;
+			y[i]=sin(x[i]);
+    	}
+    	plot(x,y);
     }
-    plot(x,y);
-}
 }mp;
+
 void display(){ mp.display(); }
 void reshape(int w,int h){ mp.reshape(w,h); }
-int main(int argc,char* argv[]){
+
+string makeBigString(int base, int exponent)
+{
+	stringstream ss;
+	ss << base;
+	for (int i = 0; i < exponent; i++)
+	{
+		ss << 0;
+	}
+	return ss.str();
+}
+
+int main(int argc, char *argv[]) 
+{
+	cout << "launching ritprem" << endl;
+	PeriodicElementFactory periodicElemFactory;
+	PeriodicElement boron = periodicElemFactory.getElement("B");
+	BigUnsigned conc = stringToBigUnsigned(makeBigString(2, 15));
+
+	Wafer wafer(6.0, 0.01, Concentration(boron, conc)); 
+	
 	glutInit(&argc, argv);
 	glutCreateWindow(100,100,400,300);
 	glutDisplayFunc( display );
 	glutReshapeFunc( reshape );
-	glutMainLoop();
+	glutMainLoop();  
 	return 0;
 }
-
-// int main(int argc, char *argv[]) 
-// {
-// 	cout << "launching ritprem" << endl;
-// 	PeriodicElementFactory periodicElemFactory;
-// 	PeriodicElement boron = periodicElemFactory.getElement("B");
-// 	BigUnsigned conc = stringToBigUnsigned(makeBigString(2, 15));
-
-// 	Wafer wafer(6.0, 0.01, Concentration(boron, conc)); 
-	
-// 	glutInit(&argc, argv);
-// 	glutCreateWindow(100,100,400,300);
-// 	glutDisplayFunc( display );
-// 	glutReshapeFunc( reshape );
-// 	glutMainLoop();  
-// 	cout << "byebye" << endl;
-// 	return 0;
-
-	
-// }
 
