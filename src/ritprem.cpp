@@ -41,7 +41,7 @@
 #include "BigIntegerLibrary.hh"
 #include "Wafer.h"
 #include "PeriodicElementFactory.h"
-#include <mgl2/mgl_cf.h>
+#include <mgl2/glut.h>
 
 // using namespace std;
 
